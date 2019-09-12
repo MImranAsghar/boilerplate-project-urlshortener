@@ -3,6 +3,7 @@
 var express = require('express');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+var dns = require('dns');
 
 var cors = require('cors');
 
@@ -25,12 +26,21 @@ app.get('/', function(req, res){
   res.sendFile(process.cwd() + '/views/index.html');
 });
 
+app.get('/', function(req, res){
+  res.sendFile(process.cwd() + '/views/index.html');
+});
   
 // your first API endpoint... 
 app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get("/shorturl/new", function (req, res) {
+  let host = req.params["urlencoded"];
+  dns.lookup(host, cb);
+  res.json({"original_url": , "short_url":});
+  
+});
 
 app.listen(port, function () {
   console.log('Node.js listening ...');
